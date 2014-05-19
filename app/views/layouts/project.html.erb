@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ProjectManagement</title>
+  <%= javascript_include_tag :defaults %>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= javascript_include_tag "jquery" %>
+   <%= javascript_include_tag "new_project" %>
+  <%= csrf_meta_tags %>
+
+   <%= stylesheet_link_tag    "#admin", :media => "all" %>
+   <%= stylesheet_link_tag    "#ublic", :media => "all" %>
+<!-- 
+   <%= stylesheet_link_tag    "bootstrap", :media => "all" %>
+  <%= stylesheet_link_tag    "bootstrap.min", :media => "all" %>
+  <%= stylesheet_link_tag    "bootstrap-responsive", :media => "all" %>
+  <%= stylesheet_link_tag    "bootstrap-responsive.min", :media => "all" %>
+ 
+  <style type="text/css">
+    #canvas1{
+      border:dashed 1px black;
+    }
+  </style> -->
+</head>
+<body id="body" position="0px 100px" style="height: 386px" alink="#ff6600" bgcolor="#f6e378">
+ <div id="main">
+    <div id="banner"> 
+     <a>
+         <%= link_to 'Project',{:controller => 'project',:action => 'index'} %>
+         |
+         <%= link_to 'Status' %>
+         |
+         <%= link_to 'Calender' %>
+         |
+         <%= link_to 'Your Friend Status' %>
+         |
+         <%= link_to 'Search'%>
+         
+         </a>
+      <% if user_signed_in?%>
+
+      <p>Signed in as <%= current_user.email %>. Not you?
+       <%= link_to "Sign out", destroy_user_session_path, :method => 'delete' %>
+           <% else %>
+      <%= link_to "Sign up"%> or <%= link_to "sign in",new_user_session_path%></p>
+      <%end%>
+    </div>
+  <!--   <div id="navigation">
+      <table>
+         <tr><th><a href="http://localhost:3000/project">Project</a></th></tr>
+         <tr><th><a href="http://localhost:3000/statuses">Daily Status</a></th></tr>
+         <tr><th><a href="http://localhost:3000/topic/view">Manage topics</a></th></tr>
+         <tr><th><a href="http://localhost:3000/users/info">Your account info</a></th></tr>
+      </table> 
+  </div> -->
+   <div id="content">
+<%= yield %>
+</div>
+<div class="clear"></div>
+</div>
+<div id="footer">
+  <p>Abhishek Sharma</p>
+  </div>
+</body>
+</html>

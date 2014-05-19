@@ -1,0 +1,22 @@
+<!-- Probably move the stylesheet to you layout. Also make sure you include the javascript. -->
+<div id="calendar">
+	<h2 id="month">
+
+
+<h1>Calendar</h1>
+<!--
+<%= raw(event_calendar) %>-->
+
+<%= calendar_for(@project)  do |t| %>
+
+  <%= t.head('mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun') %>
+  <% t.day do |day, project| %>
+    <%= day.day %>
+    <%= project.each do |project| %>
+      <%= link_to h(project.project_name), project %>
+    <% end %>
+  <% end %>
+<% end %>
+</h2>
+</div> 
+<p><a href=""><%= link_to "back to project", :controller => 'project', :action => 'index'%></a></p>

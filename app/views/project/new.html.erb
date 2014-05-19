@@ -1,0 +1,75 @@
+<!--<div id= "navi">
+  <div id="aside">
+    <h1>project</h1>
+   <b contenteditable data-title="Your company Task:">Add tasks</b><br />
+     <a>Your company Task:<div id="debug"></div></a>
+</div>
+-->
+<%= simple_form_for(@project) do |f|%>
+<%= f.input :project_name%>
+<%= f.text_field :estimeted_complete_date%>
+<%= f.input :resources%>
+<%= f.input :project_manager_name%>
+<%= f.input :cost%>
+<%= f.file_field :image%>
+<%= f.select(:user_id, @user.collect {|s| [s.email, s.id]})%>
+
+<%end%>
+
+ <!--   
+<div id="/background">
+<div class="project">
+  <a href="#" id="button">Create a new project</a>
+    <div id="output"></div>
+  
+  <div id="overlay" class="web_dialog_overlay"> </div>
+  <div id="popup" class="web_dialog">
+	<%= simple_form_for(:project, :url => {:action => 'create'}) do |f| %>
+	<table>
+ 
+	<tr>
+		<th>Project Name</th>
+		<td><%= f.text_field(:project_name)%></td>
+	</tr>
+	<tr>
+      <th><%= f.label (:estimated_complete_date)%></th>-->
+     <!-- <td><%= datepicker_input "f","estimeted_complete_date", :class => 'ui-timepicker-div'%> </td>-->
+       <!-- <td><%= f.text_field :estimeted_complete_date,:id => 'estimeted_complete_date'%></td>
+     
+    </tr>
+    <tr>
+    	 <th>People Involvement</th>
+    	 <td><%= f.text_field(:resources)%></td>
+    </tr>
+    <tr>
+    	 <th>Project Manager Name</th>
+    	 <td><%= f.text_field(:project_manager_name)%></td>
+    </tr>
+    <tr>
+    	 <th>Cost</th>
+    	 <td><%= f.text_field(:cost)%></td>
+	</tr>
+       <tr>
+         <th>Upload</th>
+         <td><%= f.file_field :image %></td>
+    </tr> 
+      <tr>
+    <th><%= f.label :remote_image_url, "or image URL" %></th>
+    <th><%= f.text_field :remote_image_url %></th>
+  </tr>
+     <tr>
+         <th><%= f.label(:user_id, "User") %></th>
+    <td><%= f.select(:user_id, @user.collect {|s| [s.email, s.id]}) %></td>
+    </tr>
+</table>
+<div class="form-buttons">
+		<h3><%= submit_tag("Create")%><h3>
+	</div>
+<%end%>
+<input id="btnSubmit" type="button" value="Submit" /> or <input id="close" type="button" value="Close" />
+  </div>
+</div>
+</div>
+
+
+-->

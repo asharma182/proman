@@ -1,0 +1,16 @@
+  <%= form_for :todo, :url => {:action => 'create_todo'}  do |f| %>
+  
+   
+<table>
+ <%= f.select(:topic_id, @topics.collect{|s| [s.id]})%>
+ 
+  <tr>
+    <th><%= f.text_field(:add) %></th>
+ 
+
+
+      <th><%= f.submit %></th>
+       </tr>
+</table>
+
+<%end%>

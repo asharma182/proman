@@ -1,0 +1,21 @@
+<%= link_to('<< back to project menu ',{:controller => 'project',:action => 'index'})%>
+<div class="page list">
+  <h2>Topic</h2>
+  
+  <%= link_to("Add New Topic", {:action => 'list'}, :class => 'action new') %>
+
+  <table class="" summary="">
+    <tr class="">
+     
+      <th>Topics you created</th>
+     
+      
+    </tr>
+    <% @topics.each do |topic| %>
+    <tr>
+      
+      <th><%= link_to h(topic.topic_name), {:controller => 'topic',:action => 'list'} %></th>
+     </tr>
+    <% end %>
+  </table>
+</div>

@@ -1,0 +1,50 @@
+<!--code for going home -->
+<%= form_for(:project, :url => {:action => 'home'}) do |f| %>
+<%= render(:partial => "shared/main", :locals => {:f => f})%>
+<%end%>
+
+<%= link_to("Back to new project", {:action => 'new'})%>
+
+<table class="mercury-region" data-type="editable">
+    <tr class="header">
+	   <th>&nbsp</th>
+        <th>&nbsp</th>
+        <th>Project Name</th>
+        <th>Estimeted Complete Date</th>
+        <th>Done</th>
+        <th>Resources</th>
+        <th>Project Manager Name</th>
+        <th>Cost</th>
+    </tr>
+  
+        <% @project.each do |f|%>
+            <tr>
+                <td><%= f.username%></td>
+                 <td><%= f.user_id%></td>
+                <td><%= best_in_place f,:project_name%></td> 
+               
+                <td><%= f.estimeted_complete_date%></td> 
+              
+               <td class="center"><%= status_tag(f.done) %></td> 
+
+            
+                <td><%= f.resources%></td>
+           
+                <td><%= f.project_manager_name%></td>
+            
+                <td><%= f.cost%></td>
+                 <td><%= image_tag f.image_url(:thumb).to_s%></td>
+
+                <td class="actions">
+                    <!--<%= link_to "Edit Page","/editor" + request.path%>-->
+            <%= link_to "Edit",{:action => 'edit', :id => f.id}, 
+             :class => 'action edit'%>
+               <%= link_to "Delete",{:action => 'delete', :id => f.id}, 
+             :class => 'action delete'%>
+            </td>
+            </tr>
+            
+    <%end%>
+</table>
+</div>
+	

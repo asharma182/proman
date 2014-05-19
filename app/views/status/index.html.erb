@@ -1,0 +1,9 @@
+<!--code for going home -->
+<%= form_for(:project, :url => {:action => 'home'}) do |f| %>
+<%= render(:partial => "shared/main", :locals => {:f => f})%>
+<%end%>
+
+<h2>Daily Statuses</h2>
+<% @discussion.each do |f|%>
+	<%= link_to (f.discussion)%>
+<%end%>

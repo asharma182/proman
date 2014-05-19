@@ -1,0 +1,103 @@
+<div id="/background_topic">
+ <div id="test"><a>Create Topics</a></div>
+<div id="new">
+
+
+  <%= form_for(:topic, :url => {:action => 'create', :project_id => @project.id}) do |f| %>
+  
+    <%= render(:partial => 'form', :locals => {:f => f}) %>
+
+    <div class="form-buttons">
+      <%= submit_tag("Add new topic") %>
+    </div>
+    
+  <% end %>
+  <div id="cancel">
+    <a>dont want to create topics</a>
+  </div>
+</div>
+
+<hr>
+
+ 
+  
+ <table>
+    <ul>
+     
+      <th>Topic Name</th>
+      
+    </ul>
+    <% @topics.each do |topic| %>
+    <tr>
+      
+      <th><b><%= topic.topic_name %></b></th>
+
+    
+         <th>  <%= link_to ("Add Discussions"),{:controller => 'discussion', :action => 'list',:topic_id => topic.id}, :onclick => "sho(); return true;",:class => 'action show'%>
+            </th> 
+                
+            <th>  <%= link_to ("To do list"),{:controller => 'todo', :action => 'list',:topic_id => topic.id}, :class => 'action show'%>
+            </th>
+            <!--  -->
+<tr>
+            <th>
+              <hr>
+              <table>
+                <ul>
+              
+                <li><a>Discussions:</a></li><br />
+                 <% topic.discussions.each do |discussion| %>
+               <li contenteditable data-title=""><b><%= discussion.name %></b> </li>
+                 <%end%>
+        
+              </ul>
+           
+              </table>
+            </th>
+</tr><tr>
+             <th>
+              <table>
+                <ul>
+              
+                <li><a>Todos:</a></li><br />
+                 <% topic.todos.each do |todo| %>
+               <li contenteditable data-title=""><b><%= todo.add %></b> </li>
+                 <%end%>
+        
+              </ul>
+           
+              </table>
+            </th>
+            </tr>
+          </tr>
+    <% end %>
+  </table>
+
+
+<!--
+<section id="discussion_list">
+  <h2>Discussion</h2>
+  
+  <%= link_to("Add New Discussion", {:action => 'list', :topic_id => @topic.id}, :class => 'action new') %>
+
+  <table>
+    <tr>
+     
+      <th>Name</th>
+          
+    </tr>
+    <% @discussions.each do |discussion| %>
+    <tr>
+      
+      <th><%= discussion.name %></th>
+       <th><%= link_to 'Edit', {:action => 'edit'} %></th>
+       <th><%= link_to 'Delete', :confirm => 'Are you sure?', :method => :delete  %></th>
+    </tr>
+    <% end %>
+  </table>
+</section>
+
+-->
+
+
+</div>

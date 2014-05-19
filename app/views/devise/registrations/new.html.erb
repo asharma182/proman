@@ -1,0 +1,30 @@
+
+<input type="button" id="button" value="Sign up as a new user"/>
+  
+    <div id="output"></div>
+  
+  <div id="overlay" class="web_dialog_overlay"> </div>
+  <div id="popup" class="web_dialog">
+<h1>You are logging in for only 10 days</h1>
+<%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+  	<!-- <%= f.input :username, :required => false, :autofocus => true %>-->
+    <%= f.input :first_name, :required => false %> <%= f.input :last_name, :required => false %>
+    <%= f.input :email, :required => true, :autofocus => true %>
+    <%= f.input :password, :required => true %>
+    <%= f.input :password_confirmation, :required => true %>
+     <tr>
+         <th>Upload</th>
+         <td><%= f.file_field :image %></td>
+    </tr> 
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, "Sign up" %>
+  </div>
+<% end %>
+
+<%= render "devise/shared/links" %>
+</div>

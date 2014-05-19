@@ -1,0 +1,9 @@
+
+<% @discussions.each do |f| %>
+<ul>
+	<li>
+<%= f.name%>
+<%= link_to 'Reply', :controller => 'discussion',:action => 'new',:parent_id => f %>
+</li>
+</ul>
+<%end%>

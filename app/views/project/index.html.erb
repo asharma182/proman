@@ -1,0 +1,155 @@
+<div class="/navbar-inner">
+    <div class="/container">
+      <a class="/btn btn-navbar" data-toggle="collapse"
+      data-target=".nav-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </a>
+    <a class="brand" href="#">PMS</a>
+    <div class="nav-collapse">
+      <ul class="nav">
+       <a>
+       <!--<%= link_to h(image_tag 'rails.png'), {:controller => 'project',:action => 'index'}%>
+
+         <%= link_to 'Project',{:controller => 'project',:action => 'index'} %>-->
+         
+         <%= link_to 'Calender', {:controller => 'calendar',:action => 'index'}%>
+         |
+         <%= link_to 'My Blog',{:controller => 'blogs', :action => 'index'}%>
+         |
+          <%= link_to 'Status',{:controller => 'statuses',:action => 'index'} %>
+          | 
+        
+      <% if user_signed_in?%>
+      <!-- Signed in as--> <%= current_user.first_name + " " + current_user.last_name %><%= image_tag current_user.image_url(:thumb).to_s%> 
+       <%= link_to "Sign out", destroy_user_session_path, :method => 'delete' %>
+       |
+        <%= link_to 'Edit your Account', {:controller => 'users', :action => 'edit'}%>
+           <% else %>
+    <%= link_to "Sign up"%> or <%= link_to "sign in",new_user_session_path%>
+      <%end%>
+       </a>
+     </ul>
+     </div>
+     </div>
+     </div>
+     </div>
+
+
+
+
+
+
+
+
+
+
+<div class="modal-body">
+        <div id="search">
+         <%= form_for :project do %>
+          <p>
+          <%= text_field_tag :query, params[:query]%>
+          <%= submit_tag "Search", :name => :nil%>
+          </p>
+          <%end%>
+        </div>
+<!--<div id="heading">
+<h1>To create a new project click here</h1>
+</div>-->
+<div id="/secondary"></div>
+
+<div id="/background">
+<div class="project">
+    <li>Create a new project:
+ <a href="#" id="button">   <%=  image_tag("logo.png")%><a><br />
+</li>
+ <div id="output"></div>
+  
+  <div id="overlay" class="web_dialog_overlay"> </div>
+  <div id="popup" class="web_dialog">
+    <%= form_for @projects, :url => {:action => 'create'} do |f| %>
+    <table>
+ 
+    <tr>
+        <th><b>Project Name</b></th>
+        <td><%= f.text_field(:project_name)%></td>
+    </tr>
+    <tr>
+      <th><%= f.label (:estimated_complete_date)%></th>
+     <!-- <td><%= datepicker_input "f","estimeted_complete_date", :class => 'ui-timepicker-div'%> </td>-->
+        <td><%= f.text_field :estimeted_complete_date,:id => 'estimeted_complete_date'%></td>
+     
+    </tr>
+    <tr>
+         <th>People Involvement</th>
+         <td><%= f.text_field(:resources)%></td>
+    </tr>
+    <tr>
+         <th>Project Manager Name</th>
+         <td><%= f.text_field(:project_manager_name)%></td>
+    </tr>
+    <tr>
+         <th>Cost</th>
+         <td><%= f.text_field(:cost)%></td>
+    </tr>
+       <tr>
+         <th>Upload</th>
+         <td><%= f.file_field :image %></td>
+    </tr> 
+      <tr>
+    <th><%= f.label :remote_image_url, "or image URL" %></th>
+    <th><%= f.text_field :remote_image_url %></th>
+  </tr>
+     <tr>
+         <th><%= f.label(:user_id, "User") %></th>
+   <td><%= f.select(:user_id, @user.collect {|s| [s.email, s.id]}) %></td>
+    
+    </tr>
+</table>
+
+        <%= f.submit " Create Project"%>
+         or <input id="close" type="button" value="Close" />
+    
+<%end%>
+
+  </div>
+</div>
+</div>
+
+
+<!--projects list -->
+<div id="aside"> <table>
+    <ul>
+       
+	<ul>      
+        <li>Project Name |<%= pluralize(@project.size, 'project')%> found
+            |
+            <%= link_to ("View all projects"), {:action => "show"}, :onclick => "change();"  %></li>
+    </ul>
+    <ul>
+       <% @project.each do |f|%>
+       <hr>
+            <li> <%= link_to (f.project_name) ,{:action => 'project_name',:project_id => f.id} %>
+                |
+             <b>is currently assigned to:</b><ul><li><%=image_tag current_user.image_url(:thumb).to_s%> <% @add_users.each do |user|%>
+                        <%= user.add_more_user%>
+
+                          <%end%> </li></ul>
+                |
+               have <%= pluralize f.topics.size, '' %><%= link_to "topics",{:controller => 'topic', :action => 'list', :project_id => f.id}%>
+              <!--  |
+                <% f.topics.each do |topic|%>
+                <%= pluralize topic.discussions.size, ''%><%= link_to "discussions",{:controller => 'discussion', :action => 'list'}%>found</li>
+                <%end%>-->
+            
+            <%end%>
+        
+    </ul>
+
+</ul></table>
+</div>
+
+<!-- <canvas id="canvas2" width="200" height="200">
+your bworser doesnot support this</canvas> -->
+</div>

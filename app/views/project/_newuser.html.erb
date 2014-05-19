@@ -1,0 +1,13 @@
+<!--<%= form_for @user, :url => {:action => 'add_user'} do |p|%>
+<%=  text_field_tag :query, params[:query]%>
+<%= submit_tag "Search", :name => 'search by name or email'%>
+<%= p.select(:email, @users.collect{|s| [s.email]})%>
+<%= p.submit ('Add User')%>
+<%end%>-->
+
+<%= form_for :add_user_to_projects, :url => {:action => 'add_user'},:project_id => @project.id do |p|%>
+<%= p.select(:project_id, @projects.collect{|s| [s.id]})%>
+
+<%= p.text_field :add_more_user %>
+<%= p.submit ('Add User')%>
+<%end%>

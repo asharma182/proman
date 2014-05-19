@@ -1,0 +1,27 @@
+#blog_background{
+  //background-color:#eb5c0f ;
+  position:relative;
+  margin: 0px 10px 10px 10px;
+  padding: 0 0 0 0;
+  height: 500;
+  width: 1300;
+}
+.text_field{
+  position:relative;
+  margin:30px 10px 0px 0px;
+  background-color: ;
+  height: 80px;
+  width: 1300px;
+  padding-left: -600px;
+}
+
+#show_field{
+  text-align: left;
+  text-decoration: red;
+  margin: 1px 2px 3px 4px;
+  padding-bottom: 2px;
+  background-color: #e04712;
+  border: 2px solid #012428;
+  width: 500px;
+  border-spacing: 2px;
+}

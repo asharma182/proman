@@ -1,0 +1,5 @@
+<a> Add your views</a>
+<%= form_for(:explore, :url => {:action => 'save'}) do |f|%>
+	<%= f.text_area(:text, :size => "100*50")%><br />
+	<a><%= submit_tag("Save")%></a>
+<%end%>

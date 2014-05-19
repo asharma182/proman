@@ -1,0 +1,360 @@
+<p>
+  <b>Text:</b>
+  <%= best_in_place @project, :project_name %>
+</p>
+
+<div class="aside" id="aside">
+
+<p><%= link_to "back to project", :controller => 'project', :action => 'index'%></p>
+    <% @projects.each do |f| %>
+    <tr>
+            <h1 id="/spacing"><a><%= f.project_name %></a></h1>
+
+        </tr> 
+         <%end%>
+
+
+  <p id="topics">Project Topics:</p>
+         
+  <div class="project_topics" id="project_topics">
+    <table>
+    <tr>
+      <ul>
+      <% @topics.each do |topic| %>
+    
+       <li id=""><%= best_in_place topic,:topic_name%>: <%= pluralize topic.discussions.size,'discussion'%>,<%= pluralize topic.todos.size,'todo'%></li>
+
+        <%end%>
+      </ul>
+    </tr>
+  </table>
+  <div id="test"><a>Create Topics</a></div>
+          <div id="new">
+             <%= form_for :topic, :url => {:action => 'create_topics'},:project_id => @project,:html => {:id => 'new_input' } do |f| %>
+               <a id="hide"><%= f.select(:project_id, @projects.collect {|s| [s.id]})%></a>
+   
+               <%= f.text_field(:topic_name)%>
+               <%= f.submit "Create"%>
+               
+                <%end%>
+                <div id="cancel">
+                   <a>or cancel</a>
+                  </div>
+                </div>
+    </div>
+
+
+
+
+    </tr>
+
+  <p id="inbox">inbox:</p>
+  <ul id="MenuBar2" class="MenuBarHorizontal">
+    <li><a class="MenuBarItemSubmenu" href="#">Project Type:</a>
+      <ul>
+        <li><a href="#"> Personal</a></li>
+        <li><a href="#">Workspace</a></li>
+</ul>
+    </li>
+</ul>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp; </p>
+  <ul id="MenuBar1" class="MenuBarHorizontal">
+    <li><a class="MenuBarItemSubmenu" href="#">Company Undertaking Project Name</a>
+      <ul>
+          <!--<% @project_undertaken.each do |f|%>
+          <li><a href="#"><%= f.project_name%></li>
+          <%end%>-->
+      </ul>
+    </li>
+</ul>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <div class="project_details" >
+    <p id="project_details">project details:    </p>
+
+    <!-- filter -->
+    <div id="show_details">
+    <p href="#" id="button">add filter:</p>
+      <div id="overlay" class="web_dialog_overlay"> </div>
+                    <div id="popup" class="web_dialog">
+                      <h1>Add filter to <a id="topic_filter">topics</a>,<a id="discussion_filter">discussions<a>,<a id="todos_filter">todos</a></h1>
+                      <%= form_for :topic, :url => {:action => 'create_topics'},:project_id => @project,:html => {:id => 'new_input' } do |f| %>
+                         <%= f.select(:project_id, @topics.collect {|s| [s.topic_name]})%>  
+                         <%end%>       
+                    </div>
+
+    <!-- add persons -->
+    <div class="persons" id="persons3">
+           <p><a href="#">people involved: </a> 
+                 <li><%= image_tag current_user.image_url(:thumb).to_s%><%= current_user.first_name + " " + current_user.last_name%></li>
+                 
+                          <% @add_users.each do |f|%>
+                        <li>    <%= f.add_more_user%> </li>
+
+                          <%end%>
+                 
+
+                 <a href="#" id="button1">Add more </a>
+                    
+                    <div id="overlay" class="web_dialog_overlay"> </div>
+                    <div id="popup" class="web_dialog">
+                    <%= render :partial => 'newuser' %>
+                   <input id="close" type="button" value="Close" />
+                    </div>
+          </p>
+
+    </div>
+  </div>
+ 
+</div>
+
+  <script type="text/javascript">
+var MenuBar1 = new Spry.Widget.MenuBar("MenuBar1", {imgDown:"SpryAssets/SpryMenuBarDownHover.gif", imgRight:"SpryAssets/SpryMenuBarRightHover.gif"});
+var MenuBar2 = new Spry.Widget.MenuBar("MenuBar2", {imgDown:"SpryAssets/SpryMenuBarDownHover.gif", imgRight:"SpryAssets/SpryMenuBarRightHover.gif"});
+</script>
+
+
+
+
+<div id="main_content" class="main_content">
+  <!--<span class="main_content"><br />-->
+   <table>
+    <ul>
+     
+      <li><h1>Topic Name</h1></li>
+           <div id="search">
+         <%= form_for :project do %>
+          <p>
+          <%= text_field_tag :query, params[:query]%>
+          <%= submit_tag "Search topics,text-documents,todos,discussions,files", :name => :nil%>
+          </p>
+          <%end%>
+        </div>
+    
+    <% @topics.each do |topic| %>
+    <tr>
+      
+      <th  id="/topic_list"><li><b id="/click_topic"><h1><%= best_in_place topic,:topic_name %> </h1><%= topic.id%></b>
+        <a><%= link_to 'See this Events in Calendar',:controller => 'calendar',:action => 'index'%></a>
+                <%= form_for :topic do |f|%>
+                <p>Attach text document<%= f.file_field(:add)%></p>
+                <%end%>
+      </li></th> 
+
+
+        <tr>
+            <th>
+              <hr>
+                            <h1>Discussions</h1>
+                             
+                                   <p><%= nested_messages topic.discussions.arrange(:order => :created_at) %></p>
+                                  
+
+                                    <br />
+
+                                    <p><%= render :partial => 'shared/discussion',:topic_id => topic%></p>
+
+
+            <!--  <table>
+                <ul>
+              
+                <li><a>Discussions:</a></li><br />
+                        <% topic.discussions.each do |discussion| %>
+                          <ul id="discussion_block">
+                            <li id="discussion_block_image">
+                           <li><%= image_tag current_user.image_url(:thumb).to_s%> </li>
+                            <li><%= current_user.first_name%></li>
+                         </li>
+                         <li id="/discussion_block_text">
+                              <b ccontenteditable data-title=""><%= best_in_place discussion, :name %></b>  <a><%= discussion.created_at %></a> <a id="reply"><%= link_to 'Reply',:controller => 'discussion',:action => 'index', :parent_id => discussion%></a>
+                              <%= link_to 'Reply',new_discussion_path(:parent_id => discussion)%></a>
+                          </li>
+                        </ul>-->
+               <!-- add discussions 
+
+                       <%end%>-->
+           
+
+
+             <!--     <li id="/more"></li> 
+                    <li>
+                     <%= link_to_function 'Add more discussion:',"jQuery('#more').append('#{escape_javascript render(:partial => 'shared/discussion',:object =>Discussion.new)}')" %>
+                     </li>-->
+           
+             <!-- </ul>
+           
+              </table>
+
+
+              <li><%= render :partial => 'shared/discussion'%></li>
+            </th>
+</tr>-->
+ <tr>
+             <th>
+              <table>
+                <ul>
+              
+                <li><a>Todos:</a></li><br />
+                 <li>Completed</li>
+                 <ul>
+                       <% if @todo.status =  true%>
+                      <% topic.todos.each do |todo| %>
+                     <li> <%= best_in_place todo,:add %></li>
+                     <%end%>
+                     <%end%>
+             </ul>
+                 <li>Notcompleted</li>
+                 <% topic.todos.each do |todo| %>
+                 <%= form_for :todo,:url => {:action => 'save_todo'} do |f|%>
+               <li>
+                <b><%= f.select(:priority, 1..3) %></b> 
+                <b><%= f.check_box(:status) %></b> 
+                <b><%= todo.priority %></b> 
+                <b ccontenteditable data-title=""><%= best_in_place todo,:add %></b>  <a>&nbsp</a> <b>Attach a file with todo <%= f.file_field(:add)%></b>  
+                <%= f.submit "Save"%>
+                      </li>
+                      <%end%>
+                 <%end%>
+        
+              </ul>
+           
+              </table>
+                 
+              <li> <%= render :partial => 'shared/todo'%></li>
+                </div>
+                </div>
+          </th>
+            </tr>
+
+          </tr>
+    <% end %>
+  </table>
+  </ul>
+<h1>Text Documents</h1><%= form_for(:project, :url => {:action => 'create'})  do |f|%>
+                        <td><%= f.file_field :image %></td>
+                        <%= f.submit%>
+                        <%end%>
+<% @projects.each do |f|%>
+<td><%= link_to h(image_tag f.image_url(:thumb).to_s),:controller => 'project',:action => 'document'%> <a>text document</a></td>
+
+<%end%>
+ <!--</span>-->
+  <div class="inbox_display" id="inbox_display">Content for  class "inbox_display" id "inbox_display" Goes Here</div>
+</div>
+
+
+
+
+
+
+
+
+<!--
+<hr>
+
+   <table class="/listing" summary="project list">
+    <tr class="header">
+     <th>Topic</th>      
+      <th> 
+        <div id="test"><a>Create Topics</a></div>
+          <div id="new">
+             <%= form_for :topic, :url => {:action => 'create_topics'},:project_id => @project,:html => {:id => 'new_input' } do |f| %>
+               <a id="hide"><%= f.select(:project_id, @projects.collect {|s| [s.id]})%></a>
+   
+               <%= f.text_field(:topic_name)%>
+               <%= f.submit "Create"%>
+               
+                <%end%>
+                <div id="cancel">
+                   <a>or cancel</a>
+                  </div>
+                </div>
+              </th>
+
+
+    </tr>
+    <% @topics.each do |topic| %>
+    <tr>
+       <td id="topic" onmouseover="/call()" contenteditable data-name="title"><%= topic.topic_name%></td>
+       <td id="debug"></td>-->
+
+                        <!--
+                     <% @projects.each do |f|%>
+                  
+                      <ul id="show_discussion"> <%= link_to ("Add Discussions"),{:controller => 'discussion', :action => 'view', :project_id => f.id, :method => :post}, :class => 'action show'%>
+                           
+                  <%= link_to ("To do list"),{:controller => 'todo', :action => 'new', :project_id => f.id}, :class => 'action show'%>
+                       <%= link_to ("Delete topics"),{ :action => 'delete', :project_id => f.id}, :class => 'action delete'%>   </ul>  
+                         <%end%>--> 
+   <!--       <tr>
+            <th>
+              <hr>
+              <table>
+                <ul>
+              
+                <li><a>Discussions:</a></li><br />
+                 <% topic.discussions.each do |discussion| %>
+               <li><b contenteditable data-title=""><%= discussion.started_by %><%= discussion.name %></b> | <%= discussion.created_at %> </li>-->
+               <!-- add discussions -->
+
+         <!--     <%end%>-->
+           
+
+
+             <!--     <li id="/more"></li> 
+                    <li>
+                     <%= link_to_function 'Add more discussion:',"jQuery('#more').append('#{escape_javascript render(:partial => 'shared/discussion',:object =>Discussion.new)}')" %>
+                     </li>-->
+           
+          <!--    </ul>
+           
+              </table>-->
+              <!-- <div id="add_discussion"><a>Add Discussions</a></div>
+          <div id="new_discussion">-->
+             <!-- <li><% render :partial => 'shared/discussion'%></li>-->
+           <!--      <div id="cancel_discussion">
+                   <a>or cancel</a>
+                  </div>
+                </div>-->
+      <!--      </th>
+</tr>
+                 <tr>
+             <th>
+              <table>
+                <ul>
+              
+                <li><a>Todos:</a></li><br />
+                 <% topic.todos.each do |todo| %>
+               <li>
+                <b><%= check_box_tag(:visible) %></b> 
+                <b><%= todo.priority %></b> 
+                <b contenteditable data-title=""><%= todo.add %></b>  <a>&nbsp</a><a>Attach a file with todo</a> </li> 
+                 <%end%>
+        
+              </ul>
+           
+              </table>-->
+              <!--   <div id="add_topic"><a>Add Topics</a></div>
+          <div id="new_topic">-->
+               <% render :partial => 'shared/todo'%>
+              <!--   <div id="cancel_topic">
+                   <a>or cancel</a>
+                </div>
+                </div>-->
+         <!--   </th>
+            </tr>
+
+
+
+            </tr>
+    
+    <% end %>
+  </table>
+
+  <hr>
+
+<%= render :partial => 'document'%>-->
+
+

@@ -1,0 +1,4 @@
+
+<%= discussion.name%>
+<%= link_to 'Reply', new_discussion_path(:parent_id => discussion) %> 
+  <%= link_to 'Destroy', discussion, method: :delete, data: { confirm: 'Are you sure?' } %>

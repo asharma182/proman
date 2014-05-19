@@ -1,0 +1,17 @@
+<div id="calendar">
+	<h2 id="month">
+    <%= link_to "<", :month => (Date.today.beginning_of_month-1).strftime("%Y-%m")%>
+    <%=h Date.today.strftime("%B %Y")%>
+    <%= link_to ">", :month => (Date.today.end_of_month+1).strftime("%Y-%m")%>
+	</h2>
+<%= calendar_for @project,:year => Date.today.year,:month => Date.today.month do |t| %>
+  <%= t.head('mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun') %>
+  <%= t.day do |day, project_name| %>
+    <%= day.day %>
+    <% project_name.each do |project| %>
+      <%= h(project.name) %>
+    <% end %>
+  <% end %>
+<% end %>
+
+</div> 

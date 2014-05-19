@@ -1,0 +1,24 @@
+
+<div class="page list">
+  <h2>todo</h2>
+  
+  <%= link_to("Add New Todo", {:action => 'list', :topic_id => @topic.id}, :class => 'action new') %>
+
+  <table class="listing" summary="Page list">
+    <tr class="header">
+     
+      <th>Name</th>
+      <th>visible</th>
+      
+    </tr>
+    <% @todos.each do |todo| %>
+    <tr>
+      
+      <td><%= todo.add %></td>
+            <td><%= todo.visible %></td>
+                  <td><%= todo.priority %></td>
+ 
+    </tr>
+    <% end %>
+  </table>
+</div>

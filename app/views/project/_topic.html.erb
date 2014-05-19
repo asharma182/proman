@@ -1,0 +1,15 @@
+
+  <%= form_for :topic, :url => {:action => 'create_topic'},:project_id => @project.id,:remote => true do |f| %>
+  
+    
+  <ul>
+     <li id="/hide"><%= f.select(:project_id, @projects.collect {|s| [s.id]})%></td>
+  
+    <li><%= f.label(:topic_name) %></th>
+    <li><%= f.text_field(:topic_name) %></td>
+  </ul>
+
+   
+      <%= f.submit "Add new topic" %>
+   
+  <% end %>

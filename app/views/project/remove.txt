@@ -1,0 +1,64 @@
+
+<!-- <div id="put"  position="700px 100px" style="height: 386px" alink="#ff6600" bgcolor="#f6e3c5"
+  >
+
+ </div>  -->
+<!-- topic views -->
+
+<!-- 
+   <div id="list">
+ 
+  
+ <table class="listing" summary="Page list">
+    <tr class="header">
+     
+      <th>Topic Name</th>
+     
+      
+    </tr>
+    <% @topics.each do |topic| %>
+    <tr>
+      
+      <th><%= topic.topic_name %></th>
+     <% @project.each do |f|%>
+       <th>  <%= link_to ("Add Discussions"),{:controller => 'discussion', :action => 'list',:topic_id => f.id}, :class => 'action show'%>
+            </th>
+            <th>  <%= link_to ("To do list"),{:controller => 'todo', :action => 'list',:topic_id => f.id}, :class => 'action show'%>
+            </th> 
+            <%end%> 
+     </tr>
+    <% end %>
+  </table>
+</div>
+
+-->
+ 
+<!-- 
+<div id="list">
+  <a>Create topic</a>
+
+  <%= form_for(:topic, :url => {:action => 'create', :project_id => @project.id}) do |f| %>
+  
+    <table summary="Page form fields">
+  
+  <tr>
+    <th><%= f.hidden_field(:project_id)%></th>
+    <th><%= f.label(:topic_name) %></th>
+    <td><%= f.text_field(:topic_name) %></td>
+  </tr>
+</table>
+
+
+    <div class="form-buttons">
+      <%= submit_tag("Add new topic") %>
+    </div>
+    
+  <% end %>
+  <div id="cancel">
+    <a>dont want to create topics</a>
+  </div>
+</div>
+
+<canvas id="canvas1" width="200" height="200">
+your bworser doesnot support this</canvas>
+ -->

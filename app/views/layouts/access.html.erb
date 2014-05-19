@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ProjectManagement</title>
+ 
+    <script>
+    
+    </script>
+</head>
+<body id="body" position="0px 100px" style="height: 386px" alink="#ff6600" bgcolor="#f6e3c5">
+ <!-- <div id="/container">
+    <div id="/banner">
+      <a>
+        <%= link_to h(image_tag 'rails.png'), {:controller => 'project',:action => 'index'}%>
+
+         <%= link_to 'Project',{:controller => 'project',:action => 'index'} %>
+         |
+         <%= link_to 'Status',{:controller => 'statuses',:action => 'index'} %>
+         |
+         <%= link_to 'Calender', {:controller => 'project',:action => 'calendar'}%>
+         |
+         <%= link_to 'Your Friend Status' %>
+         |
+         <%= link_to 'Search'%>
+         |
+         <%= link_to 'My Blog',{:controller => 'blogs', :action => 'index'}%>
+         |
+          <%= link_to 'Edit your Account', {:controller => 'users', :action => 'edit'}%>
+         </a>
+      <% if user_signed_in?%>
+
+      <td><%= image_tag current_user.image_url(:thumb).to_s%></td>
+     
+      <p>Signed in as <%= current_user.email %><%= current_user.id %>. Not you?
+       <%= link_to "Sign out", destroy_user_session_path, :method => 'delete' %></p>
+           <% else %>
+      <p><%= link_to "Sign up"%> or <%= link_to "sign in",new_user_session_path%></p>
+      <%end%>
+
+    </div>
+   </div>
+    <div id="container2">
+      <div id="target">
+   
+<figure><%= yield %></figure>
+
+</div>
+</div>
+ -->
+<!-- <div id="footer">
+  <p>Abhishek Sharma</p>
+  </div> -->
+</body>
+</html>

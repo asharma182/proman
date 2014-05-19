@@ -1,0 +1,24 @@
+<div id="/blog_background">
+  <table>
+  <h1>Blogs</h1>
+  
+<div id="show_field">
+<% @blogs.each do |blog| %>
+  <tr>
+ <!--   <td><%= blog.title %></td>-->
+    <td ><%= best_in_place blog, :test %></td>
+    <td><%= link_to 'Show', blog %></td>
+    <td><%= link_to 'Edit', edit_blog_path(blog) %></td>
+    <td><%= link_to 'Destroy', blog, :confirm => 'Are you sure?', :method => :delete, :remote => true %></td>
+  </tr>
+<% end %>
+</div>
+</table>
+
+<br />
+
+<%= render 'form' %>
+
+
+
+</div>

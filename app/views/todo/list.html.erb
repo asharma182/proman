@@ -1,0 +1,64 @@
+
+
+<!-- list -->
+<div class="page list">
+   
+  <%= link_to "Add New Todo", {:action => 'list', :topic_id => @topic.id}, :class => 'action new' %>
+
+  <table class="listing" summary="Page list">
+    <tr class="header">
+     
+      
+      <th> Visible </th>
+      <th> priority</th>
+      <th> To do list </th>
+      
+    </tr>
+    <% @todos.each do |todo| %>
+    <tr>
+      <th><%= todo.visible %></th>
+                  <th><%= todo.priority %></th>
+      
+      <th><%= todo.add %></th>
+            
+ 
+    </tr>
+    <% end %>
+  </table>
+</div>
+
+
+
+<div class="">
+  
+
+  <%= form_for(:todo, :url => {:action => 'create', :topic_id => @topic.id}) do |f| %>
+  
+   
+<table summary="Page form fields">
+ <th>Create a new todo list</th>
+  <%= f.hidden_field(:topic_id)%>
+  <tr>
+    <th><%= f.label(:add) %></th>
+    <th><%= f.text_field(:add) %></th>
+  </tr>
+  <tr>
+    <th><%= f.label(:visible) %></th>
+    <th><%= f.text_field(:visible) %></th>
+  </tr>
+  <tr>
+    <th><%= f.label(:priority) %></th>
+    <th><%= f.text_field(:priority) %></th>
+  </tr>
+
+      <th><%= submit_tag("Post todo") %></th>
+</table>
+
+
+
+
+    
+   
+    
+  <% end %>
+</div>

@@ -1,0 +1,41 @@
+<h2>Edit <%= resource_name.to_s.humanize %></h2>
+
+<%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <tr>
+    <!--  <th><%= f.input :username, :required => false %><th>
+            <th><%= f.label :birthday%><th>
+      <th><%= f.datetime_select :birthday, :required => false %><th>
+         <th><%= f.label :name%><th>
+           <th><%= f.input :first_name, :required => false %> <%= f.input :last_name, :required => false %><th>
+              <th> <%= f.input :password, :autocomplete => "off", :required => false %></th>
+            <th><%= f.input :phone_no, :required => true %></th>
+       <th><%= f.input :location, :required => true %></th>
+
+     
+      <th><%= f.input :email, :required => true, :autofocus => true %></th>
+   
+        <th><%= f.input :password_confirmation, :required => false %><th>
+       <th><%= f.input :current_password, :required => true %></th>
+      -->
+
+
+ <th> <%= f.input :password, :autocomplete => "off", :hint => "leave it blank if you don't want to change it", :required => false %></th>
+    <th><%= f.input :password_confirmation, :required => false %><th>
+  <th>  <%= f.input :current_password, :hint => "we need your current password to confirm your changes", :required => true %></th> 
+  <td><%= f.file_field :image %></td>
+  </tr>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, "Update" %>
+  </div>
+<% end %>
+
+<h3>Cancel my account</h3>
+
+<p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete %>.</p>
+
+<%= link_to "Back", :back %>

@@ -1,0 +1,60 @@
+<!--<div id= "navi">
+  <div id="/aside">
+    <h1>project</h1>
+</div>-->
+<td><%= best_in_place @project,:project_name%></td> 
+<div id="/background">
+<a>here is a brief description how to create a project</a>
+<div class="project">
+  
+	<%= form_for(:project, :url => {:action => 'update', :id => @project.id}) do |f| %>
+	<table>
+	<tr>
+		<th>Project Name</th>
+		<td><%= f.text_field(:project_name)%></td>
+	</tr>
+	<tr>
+    	 <th><%= f.label :estimated_complete_date%></th>
+     <!-- <td><%= datepicker_input "f","estimeted_complete_date", :class => 'ui-timepicker-div'%> </td>-->
+        <td><%= f.text_field :estimeted_complete_date%></td>
+    </tr>
+    <tr>
+    	 <th>Done</th>
+    	 <td><%= f.check_box(:done)%></td>
+    </tr>
+    <tr>
+    	 <th>People Involvement</th>
+    	 <td><%= f.text_field(:resources)%></td>
+    </tr>
+    <tr>
+    	 <th>Project Manager Name</th>
+    	 <td><%= f.text_field(:project_manager_name)%></td>
+    </tr>
+    <tr>
+    	 <th>Cost</th>
+    	 <td><%= f.text_field(:cost)%></td>
+	</tr>
+    <th><%= f.label(:user_id, "Add more User") %></th>
+    <td><%= f.select(:user_id, @user.collect {|s| [s.username, s.id]}) %></td>
+
+     <tr>
+         <th>Upload</th>
+         <td><%= f.file_field :image %></td>
+    </tr> 
+       <tr>
+    <th><%= f.label :remote_image_url, "or image URL" %></th>
+    <th><%= f.text_field :remote_image_url %></th>
+  </tr>
+     <tr>
+         <th><%= f.label(:user_id, "User") %></th>
+    <td><%= f.select(:user_id, @user.collect {|s| [s.email, s.id]}) %></td>
+    </tr>
+</table>
+<div class="form-buttons">
+		<h3><%= submit_tag("Update")%><h3>
+	</div>
+<%end%>
+</div>
+
+</div>
+</div>
